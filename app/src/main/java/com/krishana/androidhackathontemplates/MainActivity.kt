@@ -1,12 +1,15 @@
 package com.krishana.androidhackathontemplates
 
+import android.app.ActionBar
 import android.content.ClipData
+import android.content.res.Resources
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -14,6 +17,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.NavController
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
@@ -30,6 +34,9 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
     private lateinit var bottomNavigationView: BottomNavigationView
+
+    val Int.dp: Int
+        get() = (this * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -92,14 +99,21 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             else -> HomeFragment()
         }
 
+        val fragmentContainerView = findViewById<FragmentContainerView>(R.id.fragment_container_view)
+        val params : ViewGroup.LayoutParams = fragmentContainerView.layoutParams
         fragment.replace(R.id.fragment_container_view,destinationFragment).commit()
         toolbar.title = getCurrentFragment(item.itemId)
         if(isThere(item.itemId)){
+            bottomNavigationView.visibility = View.VISIBLE
             bottomNavigationView.selectedItemId = item.itemId
+            params.height = 600.dp
         }
         else {
+            bottomNavigationView.visibility = View.GONE
+            params.height = ActionBar.LayoutParams.MATCH_PARENT
             bottomNavigationView.selectedItemId = R.id.nav_none
         }
+        fragmentContainerView.layoutParams = params
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
