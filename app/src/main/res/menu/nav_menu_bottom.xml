@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:title="Home"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:checkable="true"
+        />
+
+    <item
+        android:id="@+id/nav_message"
+        android:title="Message"
+        android:icon="@drawable/ic_baseline_message_24"
+        android:checkable="true"
+        />
+
+    <item
+        android:id="@+id/nav_settings"
+        android:title="Settings"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:checkable="true"
+        />
+
+    <item
+        android:id="@+id/nav_none"
+        android:title=""
+        android:visible="false"/>
+</menu>
