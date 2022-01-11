@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/messageFragment"
-        android:name="com.krishana.androidhackathontemplates.MessageFragment"
+        android:name="com.krishana.androidhackathontemplates.fragments.MessageFragment"
         android:label="fragment_message"
         tools:layout="@layout/fragment_message" >
         <action
