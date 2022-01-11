@@ -14,16 +14,19 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.NavController
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.krishana.androidhackathontemplates.fragments.HomeFragment
 import com.krishana.androidhackathontemplates.fragments.SettingsFragment
 import com.krishana.androidhackathontemplates.fragments.SignOutFragment
 
-class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener  {
     private lateinit var navController: NavController
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
+    private lateinit var bottomNavigationView: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -31,9 +34,29 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 
         setContentView(R.layout.activity_main)
 
+
+        var destinationFragment: Fragment
         // All stuffs related to Navigations
         navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         navController = navHostFragment.navController
+
+        bottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            destinationFragment = when(item.itemId){
+                R.id.nav_message ->MessageFragment()
+                R.id.nav_settings -> SettingsFragment()
+                else -> HomeFragment()
+            }
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_view,destinationFragment)
+                .commit()
+
+            toolbar.title = getCurrentFragment(item.itemId)
+
+            false
+        }
+
+
 
 
         drawerLayout = findViewById(R.id.drawer_layout)
@@ -75,6 +98,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         return when(fragmentid){
             R.id.nav_signout -> "Sign Out"
             R.id.nav_settings -> "Settings"
+            R.id.nav_message -> "Message"
             else -> "Home"
         }
     }
