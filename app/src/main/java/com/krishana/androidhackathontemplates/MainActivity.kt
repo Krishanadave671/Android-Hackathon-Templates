@@ -1,9 +1,13 @@
 package com.krishana.androidhackathontemplates
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.WindowManager
 import android.widget.Toast
+import android.widget.Toolbar
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -18,17 +22,26 @@ import com.krishana.androidhackathontemplates.fragments.SignOutFragment
 class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener {
     private lateinit var navController: NavController
     private lateinit var navHostFragment: NavHostFragment
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+        WindowManager.LayoutParams.FLAG_FULLSCREEN)
+
         setContentView(R.layout.activity_main)
 
         // All stuffs related to Navigations
         navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         navController = navHostFragment.navController
-        setupActionBarWithNavController(navController)
+
+
+        drawerLayout = findViewById(R.id.drawer_layout)
+        toolbar = findViewById(R.id.toolbar)
+        ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close).syncState()
+        toolbar.title = getCurrentFragment(R.id.nav_home)
         val nav_view = findViewById<NavigationView>(R.id.nav_view)
         nav_view.setNavigationItemSelectedListener(this)
-        supportActionBar?.title = getCurrentFragment(R.id.nav_home)
 
 
     }
@@ -38,7 +51,6 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
     }
 
     override fun onBackPressed() {
-        val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
         if(drawerLayout.isDrawerOpen(GravityCompat.START)){
             drawerLayout.closeDrawer(GravityCompat.START)
         }
@@ -54,7 +66,8 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         }
 
         fragment.replace(R.id.fragment_container_view,destinationFragment).commit()
-        supportActionBar?.title = getCurrentFragment(item.itemId)
+        toolbar.title = getCurrentFragment(item.itemId)
+        drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
 
