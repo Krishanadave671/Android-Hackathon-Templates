@@ -1,28 +1,24 @@
-package com.krishana.androidhackathontemplates
+package com.krishana.androidhackathontemplates.Authentication
 
 import android.app.ActionBar
-import android.content.ClipData
 import android.content.res.Resources
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.NavController
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.krishana.androidhackathontemplates.R
 import com.krishana.androidhackathontemplates.fragments.HomeFragment
 import com.krishana.androidhackathontemplates.fragments.MessageFragment
 import com.krishana.androidhackathontemplates.fragments.SettingsFragment
@@ -71,7 +67,10 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         // Adding toolbar (removing default aqction bar and setting our own actionbar with synced to navController)
         drawerLayout = findViewById(R.id.drawer_layout)
         toolbar = findViewById(R.id.toolbar)
-        ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close).syncState()
+        ActionBarDrawerToggle(this,drawerLayout,toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        ).syncState()
         toolbar.title = getCurrentFragment(R.id.nav_home)
         val navView = findViewById<NavigationView>(R.id.nav_view)
         navView.setNavigationItemSelectedListener(this)
