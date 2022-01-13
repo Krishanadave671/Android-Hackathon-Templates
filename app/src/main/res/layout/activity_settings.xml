@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:padding="30dp"
     android:labelFor="@+id/scrollview_Signup"
-    tools:context=".Authentication.RegisterActivity">
+    tools:context=".SettingsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -85,12 +85,12 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/enter_email"
+                android:hint="Enter Email"
                 android:textColorHint="@color/black"
                 app:boxStrokeColor="@color/black"
                 app:boxStrokeWidthFocused="2dp"
                 app:hintTextColor="@color/black"
-                app:startIconDrawable="email_login"
+                app:startIconDrawable= "@drawable/ic_gmail"
 
                 app:startIconTint="@color/black">
 
@@ -108,12 +108,12 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/github_profile_optional"
+                android:hint="github_profile_optional"
                 android:textColorHint="@color/black"
                 app:boxStrokeColor="@color/black"
                 app:boxStrokeWidthFocused="2dp"
                 app:hintTextColor="@color/black"
-                app:startIconDrawable="@drawable/github_login"
+                app:startIconDrawable="@drawable/ic_baseline_edit_24"
 
                 app:startIconTint="@color/black">
 
@@ -130,14 +130,14 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/enter_password"
+                android:hint="Enter password"
                 android:textColorHint="@color/black"
                 app:boxStrokeColor="@color/black"
                 app:boxStrokeWidthFocused="2dp"
                 app:hintTextColor="@color/black"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@color/black"
-                app:startIconDrawable="@drawable/password"
+                app:startIconDrawable="@drawable/ic_baseline_lock_vectorimg"
 
                 app:startIconTint="@color/black">
 
@@ -157,7 +157,7 @@
                 android:backgroundTint="#F6BC0E"
                 android:elevation="5dp"
 
-                android:text="@string/register"
+                android:text="Register"
                 android:textColor="@color/white" />
 
         </LinearLayout>

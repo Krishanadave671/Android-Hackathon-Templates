@@ -19,10 +19,16 @@
 
         <menu>
             <item
+                android:id="@+id/nav_log_in"
+                android:title="Log In"
+                android:icon="@drawable/ic_baseline_login_24"
+                />
+            <item
                 android:id="@+id/nav_signout"
                 android:title="Sign out"
                 android:icon="@drawable/ic_baseline_sign_out_24"
                 />
+
         </menu>
     </item>
 </menu>
