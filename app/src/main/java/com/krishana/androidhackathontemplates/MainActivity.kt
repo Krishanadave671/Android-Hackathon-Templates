@@ -7,6 +7,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -27,11 +28,10 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
     private lateinit var navController: NavController
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var drawerLayout: DrawerLayout
-    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
+  private lateinit var toolbar: androidx.appcompat.widget.Toolbar
     private lateinit var bottomNavigationView: BottomNavigationView
 
-    val Int.dp: Int
-        get() = (this * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_view, destinationFragment)
                 .commit()
-            toolbar.title = getCurrentFragment(item.itemId)
+//            toolbar.title = getCurrentFragment(item.itemId)
 
             true
         }
@@ -68,6 +68,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             R.string.navigation_drawer_close
         ).syncState()
         toolbar.title = getCurrentFragment(R.id.nav_home)
+        toolbar.visibility = View.INVISIBLE
         val navView = findViewById<NavigationView>(R.id.nav_view)
         navView.setNavigationItemSelectedListener(this)
 
@@ -110,14 +111,6 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
     }
 
 
-    private fun hideSystemBars() {
-        val windowInsetsController =
-            ViewCompat.getWindowInsetsController(window.decorView) ?: return
-        // Configure the behavior of the hidden system bars
-        windowInsetsController.systemBarsBehavior =
-            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-        // Hide both the status bar and the navigation bar
-        windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
-    }
+
 
 }
