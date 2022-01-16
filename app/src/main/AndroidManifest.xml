@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidHackathonTemplates">
         <activity
+            android:name=".FireBaseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RecyclerViewActivity"
+            android:exported="true"/>
+        <activity
             android:name=".LogInActivity"
             android:exported="false" />
         <activity
