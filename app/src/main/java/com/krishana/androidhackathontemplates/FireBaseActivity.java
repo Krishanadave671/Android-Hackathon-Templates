@@ -1,6 +1,7 @@
 package com.krishana.androidhackathontemplates;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,7 +24,7 @@ import java.util.Map;
 
 public class FireBaseActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    EditText foodItem,editTextNumber;
+    EditText foodItem,editTextCategory;
     TextView expiryDate;
     Button btn ;
     String expiry;
@@ -37,7 +38,7 @@ public class FireBaseActivity extends AppCompatActivity implements DatePickerDia
         foodItem = findViewById(R.id.foodItem);
         expiryDate = findViewById(R.id.expiryDate);
         btn = findViewById(R.id.button);
-        editTextNumber = findViewById(R.id.editTextNumber);
+        editTextCategory = findViewById(R.id.editTextCategory);
 
 
         expiryDate.setOnClickListener(new View.OnClickListener() {
@@ -51,11 +52,11 @@ public class FireBaseActivity extends AppCompatActivity implements DatePickerDia
             @Override
             public void onClick(View view) {
                 String food = foodItem.getText().toString();
-                int quantity = Integer.parseInt(editTextNumber.getText().toString());
-                uploadData(food,expiry,quantity);
+                String category = editTextCategory.getText().toString();
+                uploadData(food,expiry,category);
                 foodItem.getText().clear();
                 expiryDate.setText("Date");
-                editTextNumber.getText().clear();
+                editTextCategory.getText().clear();
             }
         });
 
@@ -74,12 +75,12 @@ public class FireBaseActivity extends AppCompatActivity implements DatePickerDia
         datePickerDialog.show();
     }
 
-    public void uploadData(String food,String expiry,int quantity)
+    public void uploadData(String food,String expiry,String category)
     {
         Map<String, Object> item = new HashMap<>();
         item.put("expiryDate",expiry);
         item.put("item",food);
-        item.put("quantity",quantity);
+        item.put("category",category);
 
         db.collection("yash")
                 .add(item)
@@ -104,5 +105,11 @@ public class FireBaseActivity extends AppCompatActivity implements DatePickerDia
         expiryDate.setText(expiry);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(FireBaseActivity.this,MainActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
 
+    }
 }

@@ -3,21 +3,20 @@
 
     <item
         android:id="@+id/nav_home"
-        android:title="Home"
+        android:title=""
         android:icon="@drawable/ic_baseline_home_24"
         android:checkable="true"
         />
 
     <item
         android:id="@+id/nav_message"
-        android:title="Message"
-        android:icon="@drawable/ic_baseline_message_24"
+        android:title=" "
         android:checkable="true"
         />
 
     <item
-        android:id="@+id/nav_favorites"
-        android:title="favorites"
+        android:id="@+id/nav_items"
+        android:title=""
         android:icon="@drawable/ic_baseline_favorite_24"
         android:checkable="true"
         />

@@ -3,12 +3,12 @@ package com.krishana.androidhackathontemplates;
 public class RecyclerViewData {
     String item ;
     String expiryDate;
-    int quantity;
+    String category;
 
-    public RecyclerViewData(String item, String expiryDate,int quantity) {
+    public RecyclerViewData(String item, String expiryDate,String category) {
         this.item = item;
         this.expiryDate = expiryDate;
-        this.quantity = quantity;
+        this.category = category;
     }
 
     public RecyclerViewData()
@@ -22,7 +22,7 @@ public class RecyclerViewData {
     public String getExpiryDate() {
         return expiryDate;
     }
-    public int getQuantity() {
-        return quantity;
+    public String getCategory() {
+        return category;
     }
 }

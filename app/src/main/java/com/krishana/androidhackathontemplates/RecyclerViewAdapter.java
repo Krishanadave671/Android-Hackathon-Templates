@@ -27,7 +27,7 @@ public class RecyclerViewAdapter extends FirestoreRecyclerAdapter<RecyclerViewDa
     protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull RecyclerViewData model) {
         holder.expirtDateTextView.setText(model.getExpiryDate());
         holder.itemTextView.setText(model.getItem());
-        holder.quantityTextView.setText(String.valueOf(model.getQuantity()));
+        holder.categoryTextView.setText(model.getCategory());
     }
 
     @NonNull
@@ -40,13 +40,13 @@ public class RecyclerViewAdapter extends FirestoreRecyclerAdapter<RecyclerViewDa
     class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView itemTextView;
         private TextView expirtDateTextView;
-        private TextView quantityTextView;
+        private TextView categoryTextView;
 
         public MyViewHolder(final View itemView) {
             super(itemView);
             itemTextView = itemView.findViewById(R.id.item);
             expirtDateTextView = itemView.findViewById(R.id.expiryDateTextView);
-            quantityTextView = itemView.findViewById(R.id.quantityTextView);
+            categoryTextView = itemView.findViewById(R.id.editTextCategory);
         }
 
     }

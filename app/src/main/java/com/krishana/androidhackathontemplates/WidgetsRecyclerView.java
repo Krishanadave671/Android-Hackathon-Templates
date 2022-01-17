@@ -1,10 +1,7 @@
 package com.krishana.androidhackathontemplates;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,65 +11,51 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-import org.jetbrains.annotations.NotNull;
-
-import kotlin.jvm.internal.Intrinsics;
-
-public class RecyclerViewActivity extends AppCompatActivity {
+public class WidgetsRecyclerView extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
-
+    String choiceString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recycler_view);
+        setContentView(R.layout.activity_widgets_recycler_view);
 
-
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation_view);
-        bottomNavigationView.setOnItemSelectedListener((NavigationBarView.OnItemSelectedListener)(new NavigationBarView.OnItemSelectedListener() {
-            public final boolean onNavigationItemSelected(@NotNull MenuItem it) {
-                Intrinsics.checkNotNullParameter(it, "it");
-                Class var10000;
-                switch(it.getItemId()) {
-                    case 1000291:
-                        var10000 = RecyclerViewActivity.class;
-                        break;
-                    default:
-                        var10000 = MainActivity.class;
-                }
-
-                Class destinationActivity = var10000;
-                if(it.getItemId()!=R.id.nav_items){
-                    RecyclerViewActivity.this.startActivity(new Intent((Context)RecyclerViewActivity.this, destinationActivity));
-
-                }
-                return true;
-            }
-        }));
-        FloatingActionButton addButton = (FloatingActionButton)this.findViewById(R.id.add_items);
-        addButton.setOnClickListener((View.OnClickListener)(new View.OnClickListener() {
-            public final void onClick(View it) {
-                RecyclerViewActivity.this.startActivity(new Intent((Context)RecyclerViewActivity.this, FireBaseActivity.class));
-            }
-        }));
-
-
+        Bundle bundle = getIntent().getExtras();
+        choiceString = bundle.getString("tag");
 
         setRecyclerView();
     }
 
     private void setRecyclerView()
     {
-        Query query = FirebaseFirestore.getInstance()
+        Query query = null;
+        int choice = Integer.parseInt(choiceString);
+        Log.e("tag",""+choice);
+        switch(choice)
+        {
+            case 1:query = FirebaseFirestore.getInstance()
                 .collection("yash")
-                .orderBy("expiryDate", Query.Direction.ASCENDING);
+                .orderBy("expiryDate", Query.Direction.ASCENDING).whereEqualTo("category","meat");break;
+            case 2:query = FirebaseFirestore.getInstance()
+                .collection("yash")
+                .orderBy("expiryDate", Query.Direction.ASCENDING).whereEqualTo("category","dairy");break;
+            case 3:query = FirebaseFirestore.getInstance()
+                .collection("yash")
+                .orderBy("expiryDate", Query.Direction.ASCENDING).whereEqualTo("category","fruit");break;
+            case 4:query = FirebaseFirestore.getInstance()
+                .collection("yash")
+                .orderBy("expiryDate", Query.Direction.ASCENDING).whereEqualTo("category","leftovers");break;
+            case 5:query = FirebaseFirestore.getInstance()
+                .collection("yash")
+                .orderBy("expiryDate", Query.Direction.ASCENDING).whereEqualTo("category","drinks");break;
+            case 6:query = FirebaseFirestore.getInstance()
+                .collection("yash")
+                .orderBy("expiryDate", Query.Direction.ASCENDING).whereEqualTo("category","vegetables");break;
+        }
 
         FirestoreRecyclerOptions<RecyclerViewData> options = new FirestoreRecyclerOptions.Builder<RecyclerViewData>()
                 .setQuery(query, RecyclerViewData.class)

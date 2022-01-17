@@ -53,12 +53,12 @@
         app:layout_constraintVertical_bias="0.548" />
 
     <EditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/editTextCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="quantity"
-        android:inputType="number"
+        android:hint="category"
+        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

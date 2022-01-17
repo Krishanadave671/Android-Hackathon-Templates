@@ -10,11 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidHackathonTemplates">
         <activity
-            android:name=".FireBaseActivity"
+            android:name=".WidgetsRecyclerView"
             android:exported="false" />
         <activity
             android:name=".RecyclerViewActivity"
-            android:exported="true"/>
+            android:exported="false" />
+        <activity
+            android:name=".FireBaseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WidgetTestActivity"
+            android:exported="true" />
         <activity
             android:name=".LogInActivity"
             android:exported="false" />
@@ -26,8 +32,8 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/NoActionBar"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
