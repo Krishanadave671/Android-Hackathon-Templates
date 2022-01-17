@@ -27,12 +27,13 @@ import com.krishana.androidhackathontemplates.fragments.*
 
 class MainActivity : AppCompatActivity(){
 
+    private lateinit var drawerLayout: DrawerLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val bottomNavigationView : BottomNavigationView = findViewById(R.id.bottom_navigation_view)
-
         bottomNavigationView.setOnItemSelectedListener {
             val destinationActivity  = when(it.itemId){
                 R.id.nav_items -> RecyclerViewActivity::class.java
@@ -41,15 +42,25 @@ class MainActivity : AppCompatActivity(){
             }
             if(it.itemId != R.id.nav_home){
                 startActivity(Intent(this,destinationActivity))
-
             }
             true
         }
 
         val addButton = findViewById<FloatingActionButton>(R.id.add_items)
-
         addButton.setOnClickListener { startActivity(Intent(this,FireBaseActivity::class.java)) }
 
+        drawerLayout = findViewById(R.id.drawer_layout)
+        val navView = findViewById<NavigationView>(R.id.nav_view)
+        navView.setNavigationItemSelectedListener{
+            val destinationActivity = when(it.itemId) {
+                R.id.nav_signout -> SignOutActivity::class.java
+                R.id.nav_log_in -> LogInActivity::class.java
+                R.id.nav_settings -> SettingsActivity::class.java
+                else -> MainActivity::class.java
+            }
+            startActivity(Intent(this,destinationActivity))
+            true
+        }
 
 
     }

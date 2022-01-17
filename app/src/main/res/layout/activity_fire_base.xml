@@ -11,26 +11,26 @@
         android:id="@+id/foodItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="257dp"
-        android:layout_marginBottom="135dp"
+        android:layout_marginBottom="232dp"
         android:ems="10"
         android:hint="fooditem"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/expiryDate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.452"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/expiryDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="166dp"
+        android:layout_height="46dp"
         android:layout_marginTop="436dp"
         android:layout_marginBottom="250dp"
         android:text="date"
         android:textSize="20sp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -59,8 +59,11 @@
         android:ems="10"
         android:hint="category"
         android:inputType="text"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.307" />
 </androidx.constraintlayout.widget.ConstraintLayout>
