@@ -8,8 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -18,16 +16,13 @@ import androidx.viewpager2.widget.ViewPager2
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-
-import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.krishana.androidhackathontemplates.*
 import org.json.JSONArray
 import org.json.JSONException
 import java.lang.Math.abs
 
 class HomeFragment : Fragment() {
+
     private lateinit var list : ArrayList<recipeModel>
     private lateinit var adapter : recipeAdapter
     private lateinit var viewPagerImgSlider: ViewPager2
@@ -45,8 +40,6 @@ class HomeFragment : Fragment() {
 
         return view
     }
-
-
 
     override fun onPause() {
         super.onPause()
@@ -143,5 +136,4 @@ class HomeFragment : Fragment() {
         })
 
     }
-
 }
