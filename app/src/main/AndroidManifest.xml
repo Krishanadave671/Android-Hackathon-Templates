@@ -10,6 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidHackathonTemplates">
         <activity
+
+            android:name=".WidgetsRecyclerView"
+            android:exported="false" />
+        <activity
+            android:name=".FireBaseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RecyclerViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WidgetTestActivity"
+            android:exported="true" />
+        <activity
             android:name=".DetailedRecipe"
             android:exported="false" />
         <activity
