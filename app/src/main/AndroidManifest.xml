@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidHackathonTemplates">
         <activity
+            android:name=".DetailedRecipe"
+            android:exported="false" />
+        <activity
+            android:name=".SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".LogInActivity"
             android:exported="false" />
         <activity
@@ -20,8 +26,8 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/NoActionBar"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

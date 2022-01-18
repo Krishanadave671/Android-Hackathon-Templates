@@ -1,5 +1,6 @@
 package com.krishana.androidhackathontemplates.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
@@ -15,9 +16,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.krishana.androidhackathontemplates.R
-import com.krishana.androidhackathontemplates.recipeAdapter
-import com.krishana.androidhackathontemplates.recipeModel
+import com.krishana.androidhackathontemplates.*
 import org.json.JSONArray
 import org.json.JSONException
 import java.lang.Math.abs
@@ -97,7 +96,8 @@ class HomeFragment : Fragment() {
                         val o = jsonArray.getJSONObject(i)
                         val item = recipeModel(
                             o.getString("title"),
-                            o.getString("image")
+                            o.getString("image"),
+                            o.getInt("id")
                         )
                         list.add(item)
                     }
@@ -119,6 +119,21 @@ class HomeFragment : Fragment() {
         }
         val requestQueue = Volley.newRequestQueue(requireContext())
         requestQueue.add(stringRequest)
+
+        adapter.setOnItemClickListener(object : recipeAdapter.onItemClickListener{
+            override fun onItemClick(position: Int) {
+                val intent = Intent( requireContext() ,DetailedRecipe::class.java)
+//                val bundle = Bundle()
+//                bundle.putString("title", recipeModel.getTitle())
+//                bundle.putString("image", recipeModel.getImage())
+//                bundle.putInt("id", recipeModel.getId())
+//                intent.putExtras(bundle)
+                intent.putExtra("title",list[position].title)
+                intent.putExtra("image",list[position].image)
+                intent.putExtra("id",list[position].id)
+                startActivity(intent)
+            }
+        })
 
     }
 }
