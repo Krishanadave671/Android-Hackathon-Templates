@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -72,7 +74,15 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         val navView = findViewById<NavigationView>(R.id.nav_view)
         navView.setNavigationItemSelectedListener(this)
 
+        //test button
+        // get reference to button
+        val btn_click_me = findViewById(R.id.test_btn) as Button
+        // set on-click listener
+        btn_click_me.setOnClickListener {
+            val intent = Intent(this, SearchActivity::class.java)
 
+            startActivity(intent)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -109,6 +119,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             else -> "Home"
         }
     }
+
 
 
 
