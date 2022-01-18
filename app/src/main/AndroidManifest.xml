@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidHackathonTemplates">
         <activity
+
             android:name=".WidgetsRecyclerView"
             android:exported="false" />
         <activity
@@ -21,6 +22,12 @@
         <activity
             android:name=".WidgetTestActivity"
             android:exported="true" />
+        <activity
+            android:name=".DetailedRecipe"
+            android:exported="false" />
+        <activity
+            android:name=".SearchActivity"
+            android:exported="false" />
         <activity
             android:name=".LogInActivity"
             android:exported="false" />

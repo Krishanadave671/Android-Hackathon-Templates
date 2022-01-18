@@ -1,6 +1,8 @@
 package com.krishana.androidhackathontemplates
 
 import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,22 +15,40 @@ import com.bumptech.glide.Glide
 
 class recipeAdapter(val viewPager : ViewPager2, private val list : ArrayList<recipeModel>, private val context: Context) :
     RecyclerView.Adapter<recipeAdapter.ViewHolder>() {
-    inner class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
+
+    private lateinit var mListener :onItemClickListener
+    interface onItemClickListener {
+        fun onItemClick(position: Int)
+
+    }
+    fun setOnItemClickListener(listener: onItemClickListener){
+        mListener = listener
+    }
+
+    inner class ViewHolder(ItemView: View , listener: onItemClickListener) : RecyclerView.ViewHolder(ItemView) {
         val imageView: ImageView = itemView.findViewById(R.id.imageView_sandwich)
         val textView: TextView = itemView.findViewById(R.id.textView_sandwich)
+
+        init {
+            itemView.setOnClickListener{
+                listener.onItemClick(adapterPosition)
+            }
+
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context)
             .inflate(R.layout.home_fragment_recipes_story, parent, false)
         view.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-        return ViewHolder(view)
+        return ViewHolder(view ,mListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val ItemsViewModel = list.get(position)
         Glide.with(context).load(ItemsViewModel.image).into(holder.imageView)
         holder.textView.setText(ItemsViewModel.title)
+
 
         if (position == list.size -2){
             viewPager.post(run)

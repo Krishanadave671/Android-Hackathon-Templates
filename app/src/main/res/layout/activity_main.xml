@@ -15,6 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="650dp">
 
+
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragment_container_view"
                 android:name="androidx.navigation.fragment.NavHostFragment"
@@ -25,6 +26,17 @@
                 app:navGraph="@navigation/nav_drawer_graph" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+      
+<!--         <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_container_view"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0" -->
+
 
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -37,6 +49,7 @@
             app:itemIconSize="35dp"
             app:itemIconTint="@drawable/bottom_nav_icon"
             app:menu="@menu/nav_menu_bottom" />
+
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"
@@ -64,6 +77,19 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
     </RelativeLayout>
+
+<!--         <Button
+            android:id="@+id/test_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="372dp"
+            android:layout_marginEnd="56dp"
+            android:text="Button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fragment_container_view" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout> -->
+
 
 
     <com.google.android.material.navigation.NavigationView

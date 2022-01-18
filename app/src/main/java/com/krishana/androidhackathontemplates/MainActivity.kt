@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -51,18 +53,66 @@ class MainActivity : AppCompatActivity(){
 
         drawerLayout = findViewById(R.id.drawer_layout)
         val navView = findViewById<NavigationView>(R.id.nav_view)
-        navView.setNavigationItemSelectedListener{
-            val destinationActivity = when(it.itemId) {
-                R.id.nav_signout -> SignOutActivity::class.java
-                R.id.nav_log_in -> LogInActivity::class.java
-                R.id.nav_settings -> SettingsActivity::class.java
-                else -> MainActivity::class.java
-            }
-            startActivity(Intent(this,destinationActivity))
-            true
+
+//         navView.setNavigationItemSelectedListener{
+//             val destinationActivity = when(it.itemId) {
+//                 R.id.nav_signout -> SignOutActivity::class.java
+//                 R.id.nav_log_in -> LogInActivity::class.java
+//                 R.id.nav_settings -> SettingsActivity::class.java
+//                 else -> MainActivity::class.java
+//             }
+//             startActivity(Intent(this,destinationActivity))
+//             true
+
+        navView.setNavigationItemSelectedListener(this)
+
+        //test button
+        // get reference to button
+        val btn_click_me = findViewById(R.id.test_btn) as Button
+        // set on-click listener
+        btn_click_me.setOnClickListener {
+            val intent = Intent(this, SearchActivity::class.java)
+
+            startActivity(intent)
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return super.onSupportNavigateUp() || navController.navigateUp()
+    }
+
+    override fun onBackPressed() {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START)
+        }
+        else
+        super.onBackPressed()
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        val destinationClass  = when(item.itemId){
+            R.id.nav_signout -> SignOutActivity::class.java
+            R.id.nav_settings -> SettingsActivity::class.java
+            R.id.nav_log_in -> LogInActivity::class.java
+            else -> MainActivity::class.java
+        }
+        drawerLayout.closeDrawer(GravityCompat.START)
+        if(destinationClass != MainActivity::class.java){
+            val intent = Intent(this,destinationClass)
+            startActivity(intent)
+        }
+        return true
+    }
+
+    fun getCurrentFragment(fragmentid : Int) : String{
+        return when(fragmentid){
+            R.id.nav_favorites -> "Favourites"
+            R.id.nav_message -> "Message"
+            else -> "Home"
         }
 
 
     }
+
 
 }
