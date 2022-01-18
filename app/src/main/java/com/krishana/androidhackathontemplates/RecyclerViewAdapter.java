@@ -1,5 +1,6 @@
 package com.krishana.androidhackathontemplates;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +26,15 @@ public class RecyclerViewAdapter extends FirestoreRecyclerAdapter<RecyclerViewDa
 
     @Override
     protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull RecyclerViewData model) {
-        holder.expirtDateTextView.setText(model.getExpiryDate());
+        holder.expirtDateTextView.setText(String.valueOf(model.getExpiryDate()));
         holder.itemTextView.setText(model.getItem());
         holder.categoryTextView.setText(model.getCategory());
+        if(model.getExpiryDate()<=0)
+        {
+            holder.expirtDateTextView.setTextColor(Color.RED);
+            holder.itemTextView.setTextColor(Color.RED);
+            holder.categoryTextView.setTextColor(Color.RED);
+        }
     }
 
     @NonNull

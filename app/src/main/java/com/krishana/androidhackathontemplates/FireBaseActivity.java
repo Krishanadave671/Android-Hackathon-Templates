@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,9 +19,14 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class FireBaseActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -28,6 +34,7 @@ public class FireBaseActivity extends AppCompatActivity implements DatePickerDia
     TextView expiryDate;
     Button btn ;
     String expiry;
+    long send;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +60,7 @@ public class FireBaseActivity extends AppCompatActivity implements DatePickerDia
             public void onClick(View view) {
                 String food = foodItem.getText().toString();
                 String category = editTextCategory.getText().toString();
-                uploadData(food,expiry,category);
+                uploadData(food,send,category);
                 foodItem.getText().clear();
                 expiryDate.setText("Date");
                 editTextCategory.getText().clear();
@@ -75,10 +82,10 @@ public class FireBaseActivity extends AppCompatActivity implements DatePickerDia
         datePickerDialog.show();
     }
 
-    public void uploadData(String food,String expiry,String category)
+    public void uploadData(String food,long send,String category)
     {
         Map<String, Object> item = new HashMap<>();
-        item.put("expiryDate",expiry);
+        item.put("expiryDate",send);
         item.put("item",food);
         item.put("category",category);
 
@@ -88,6 +95,7 @@ public class FireBaseActivity extends AppCompatActivity implements DatePickerDia
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d("tag", "DocumentSnapshot added with ID: " + documentReference.getId());
+                        Toast.makeText(FireBaseActivity.this, "Item Uploaded!!", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -101,6 +109,20 @@ public class FireBaseActivity extends AppCompatActivity implements DatePickerDia
 
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+        SimpleDateFormat myFormat = new SimpleDateFormat("dd MM yyyy");
+        Date systemDate = new Date();
+        String inputString1 = myFormat.format(systemDate);
+        String inputString2 = i2+" "+(i1+1)+" "+i;
+
+        try {
+            Date date1 = myFormat.parse(inputString1);
+            Date date2 = myFormat.parse(inputString2);
+            long diff = date2.getTime() - date1.getTime();
+            send = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         expiry = i+"/"+(i1+1)+"/"+i2;
         expiryDate.setText(expiry);
     }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -95,6 +96,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 recyclerViewAdapter.deleteData(viewHolder.getAdapterPosition());
+                Toast.makeText(RecyclerViewActivity.this, "Item Deleted!!", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
 

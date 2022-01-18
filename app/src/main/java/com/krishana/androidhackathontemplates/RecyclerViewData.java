@@ -2,10 +2,10 @@ package com.krishana.androidhackathontemplates;
 
 public class RecyclerViewData {
     String item ;
-    String expiryDate;
+    long expiryDate;
     String category;
 
-    public RecyclerViewData(String item, String expiryDate,String category) {
+    public RecyclerViewData(String item, long expiryDate,String category) {
         this.item = item;
         this.expiryDate = expiryDate;
         this.category = category;
@@ -19,7 +19,7 @@ public class RecyclerViewData {
     public String getItem() {
         return item;
     }
-    public String getExpiryDate() {
+    public long getExpiryDate() {
         return expiryDate;
     }
     public String getCategory() {
